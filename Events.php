@@ -6,6 +6,8 @@ use Yii;
 use yii\helpers\Url;
 use humhub\modules\humhubchat\widgets\ChatFrame;
 use humhub\modules\humhubchat\Assets;
+use humhub\modules\humhubchat\controllers\ChatController;
+use humhub\modules\humhubchat\models\UserChatMessage;
 
 /**
  * Description of Events
@@ -55,5 +57,12 @@ class Events extends \yii\base\Object
         if ($user != null) {
             $event->sender->addWidget(ChatFrame::className(), array('contentContainer' => $user), array('sortOrder' => 0));
         }
+    }
+
+    public static function onDailyCron($event)
+    {
+       // delete old chats
+        UserChatMessage::deleteAll('ts < DATE_ADD(CURRENT_TIMESTAMP, INTERVAL -1 DAY)');
+
     }
 }

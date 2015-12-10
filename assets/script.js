@@ -66,25 +66,20 @@ var chat = {
 			// Using our tzPOST wrapper method to send the chat
 			// via a POST AJAX request:
 
-			$.tzPOST('submitChat',$(this).serialize(),function(r){
-				working = false;
+			$.ajax({url:'/index.php?r=humhub-chat/chat/submit',
+		            data: $(this).serialize(),
+		            success:function(r){
+		            	working = false;
+		            	$('#chatText').val('');
+						$('div.chat-'+tempID).remove();
 
-				$('#chatText').val('');
-				$('div.chat-'+tempID).remove();
-
-				params['id'] = r.insertID;
-				chat.addChatLine($.extend({},params));
-			});
+						params['id'] = r.insertID;
+						chat.addChatLine($.extend({},params));
+		            }
+		        }
+		     );
 
 			return false;
-		});
-
-		// Checking whether the user is already logged (browser refresh)
-
-		$.tzGET('checkLogged',function(r){
-			if(r.logged){
-				chat.login(r.loggedAs.name,r.loggedAs.gravatar);
-			}
 		});
 
 		// Self executing timeout functions
@@ -190,48 +185,54 @@ var chat = {
 	// (since lastID), and adds them to the page.
 
 	getChats : function(callback){
-		$.tzGET('getChats',{lastID: chat.data.lastID},function(r){
+		 $.ajax({url:'/index.php?r=humhub-chat/chat/chats',
+            data: {lastID: chat.data.lastID},
+            datatype: 'json',
+            success:function(r){
+            	r = JSON.parse(r);
+                for(var i=0;i<r.chats.length;i++){
+					chat.addChatLine(r.chats[i]);
+				}
 
-			for(var i=0;i<r.chats.length;i++){
-				chat.addChatLine(r.chats[i]);
-			}
+				if(r.chats.length){
+					chat.data.noActivity = 0;
+					chat.data.lastID = r.chats[i-1].id;
+				}
+				else{
+					// If no chats were received, increment
+					// the noActivity counter.
 
-			if(r.chats.length){
-				chat.data.noActivity = 0;
-				chat.data.lastID = r.chats[i-1].id;
-			}
-			else{
-				// If no chats were received, increment
-				// the noActivity counter.
+					chat.data.noActivity++;
+				}
 
-				chat.data.noActivity++;
-			}
+				if(!chat.data.lastID){
+					chat.data.jspAPI.getContentPane().html('<p class="noChats">No chats yet</p>');
+				}
 
-			if(!chat.data.lastID){
-				chat.data.jspAPI.getContentPane().html('<p class="noChats">No chats yet</p>');
-			}
+				// Setting a timeout for the next request,
+				// depending on the chat activity:
 
-			// Setting a timeout for the next request,
-			// depending on the chat activity:
+				var nextRequest = 1000;
 
-			var nextRequest = 1000;
+				// 2 seconds
+				if(chat.data.noActivity > 3){
+					nextRequest = 2000;
+				}
 
-			// 2 seconds
-			if(chat.data.noActivity > 3){
-				nextRequest = 2000;
-			}
+				if(chat.data.noActivity > 10){
+					nextRequest = 5000;
+				}
 
-			if(chat.data.noActivity > 10){
-				nextRequest = 5000;
-			}
+				// 15 seconds
+				if(chat.data.noActivity > 20){
+					nextRequest = 15000;
+				}
 
-			// 15 seconds
-			if(chat.data.noActivity > 20){
-				nextRequest = 15000;
-			}
+				setTimeout(callback,nextRequest);
+            }
+        }
+     );
 
-			setTimeout(callback,nextRequest);
-		});
 	},
 
 	// Requesting a list with all the users.
@@ -289,11 +290,11 @@ var chat = {
 // Custom GET & POST wrappers:
 
 $.tzPOST = function(action,data,callback){
-	$.post('php/ajax.php?action='+action,data,callback,'json');
+	//$.post('php/ajax.php?action='+action,data,callback,'json');
 }
 
 $.tzGET = function(action,data,callback){
-	$.get('php/ajax.php?action='+action,data,callback,'json');
+	$.get(action,data,callback,'json');
 }
 
 // A custom jQuery method for placeholder text:
