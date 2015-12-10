@@ -118,7 +118,7 @@ var chat = {
 			case 'user':
 				arr = [
 					'<div class="user" title="',params.name,'"><img src="',
-					params.gravatar,'" width="30" height="30" onload="this.style.visibility=\'visible\'" /></div>'
+					params.gravatar,'" width="23" height="23" onload="this.style.visibility=\'visible\'" /></div>'
 				];
 			break;
 		}
@@ -238,31 +238,36 @@ var chat = {
 	// Requesting a list with all the users.
 
 	getUsers : function(callback){
-		$.tzGET('getUsers',function(r){
+		$.ajax({url:'/index.php?r=humhub-chat/chat/users',
+            datatype: 'json',
+            success:function(r){
+                r = JSON.parse(r);
+                var users = [];
 
-			var users = [];
+                for(var i=0; i< r.users.length;i++){
+                    if(r.users[i]){
+                        users.push(chat.render('user',r.users[i]));
+                    }
+                }
 
-			for(var i=0; i< r.users.length;i++){
-				if(r.users[i]){
-					users.push(chat.render('user',r.users[i]));
-				}
-			}
+                var message = '';
 
-			var message = '';
+                if(r.users.length<1){
+                    message = 'No one is online';
+                }
+                else {
+                    message = r.users.length+' '+(r.users.length == 1 ? 'person':'people')+' online';
+                }
 
-			if(r.total<1){
-				message = 'No one is online';
-			}
-			else {
-				message = r.total+' '+(r.total == 1 ? 'person':'people')+' online';
-			}
+                users.push('<p class="count">'+message+'</p>');
 
-			users.push('<p class="count">'+message+'</p>');
+                $('#chatUsers').html(users.join(''));
 
-			$('#chatUsers').html(users.join(''));
+                setTimeout(callback,15000);
+            }
+        }
+     );
 
-			setTimeout(callback,15000);
-		});
 	},
 
 	// This method displays an error message on the top of the page:

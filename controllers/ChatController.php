@@ -65,5 +65,18 @@ class ChatController extends Controller
         $chat->save();
     }
 
+    public function actionUsers()
+    {
+        $onlineUsers = \humhub\modules\user\components\Session::getOnlineUsers()->asArray(true)->all();
+        $users = array();
+        foreach ($onlineUsers as $onlineUser) {
+            $user = array();
+            $user['name'] = $onlineUser['username'];
+            $user['gravatar'] = '/uploads/profile_image/' . $onlineUser['guid'] . '.jpg';
+            $users[] = $user;
+        }
+        return json_encode(array('users' => $users));
+    }
+
 
 }
