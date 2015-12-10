@@ -16,8 +16,6 @@ return [
      'events' => [
         ['class' => TopMenu::className(), 'event' => TopMenu::EVENT_INIT, 'callback' => ['humhub\modules\humhubchat\Events', 'onTopMenuInit']],
         ['class' => CronController::className(), 'event' => CronController::EVENT_ON_DAILY_RUN, 'callback' => ['humhub\modules\humhubchat\Events', 'onDailyCron']],
-        ['class' => Sidebar::className(), 'event' => Sidebar::EVENT_INIT, 'callback' => array('humhub\modules\humhubchat\Events', 'onSpaceSidebarInit')],
-        ['class' => ProfileSidebar::className(), 'event' => ProfileSidebar::EVENT_INIT, 'callback' => array('humhub\modules\sshl\Events', 'onProfileSidebarInit')],
         ['class' => \humhub\modules\dashboard\widgets\Sidebar::className(), 'event' => \humhub\modules\dashboard\widgets\Sidebar::EVENT_INIT, 'callback' => array('humhub\modules\humhubchat\Events', 'onDashboardSidebarInit')]
 
     ],
