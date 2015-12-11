@@ -20,7 +20,7 @@
 	right: 0;
 	width: 16px;
 	height: 100%;
-	background: red;
+	background: #202020;
 }
 
 .jspHorizontalBar{
@@ -29,7 +29,7 @@
 	left: 0;
 	width: 100%;
 	height: 16px;
-	background: red;
+	background: #202020;
 }
 
 .jspVerticalBar *,
@@ -52,10 +52,9 @@
 }
 
 .jspDrag{
-	background: #bbd;
 	position: relative;
 	top: 0;
-	left: 0;
+	left: -11px;
 	cursor: pointer;
 }
 
