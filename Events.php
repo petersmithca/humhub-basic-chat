@@ -22,7 +22,7 @@ class Events extends \yii\base\Object
             return;
         }
 
-         $event->sender->view->registerAssetBundle(Assets::className());
+
     }
 
 
@@ -31,7 +31,7 @@ class Events extends \yii\base\Object
         if (Yii::$app->user->isGuest) {
             return;
         }
-
+        $event->sender->view->registerAssetBundle(Assets::className());
         $event->sender->addWidget(ChatFrame::className(), array(), array('sortOrder' => 0));
 
     }
