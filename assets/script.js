@@ -66,7 +66,7 @@ var chat = {
 			// Using our tzPOST wrapper method to send the chat
 			// via a POST AJAX request:
 
-			$.ajax({url:'/index.php?r=humhub-chat/chat/submit',
+			$.ajax({url: chat_Submit,
 		            data: $(this).serialize(),
 		            success:function(r){
 		            	working = false;
@@ -185,7 +185,7 @@ var chat = {
 	// (since lastID), and adds them to the page.
 
 	getChats : function(callback){
-		 $.ajax({url:'/index.php?r=humhub-chat/chat/chats',
+		 $.ajax({url: chat_GetChats,
             data: {lastID: chat.data.lastID},
             datatype: 'json',
             success:function(r){
@@ -238,7 +238,7 @@ var chat = {
 	// Requesting a list with all the users.
 
 	getUsers : function(callback){
-		$.ajax({url:'/index.php?r=humhub-chat/chat/users',
+		$.ajax({url: chat_ListUsers,
             datatype: 'json',
             success:function(r){
                 r = JSON.parse(r);

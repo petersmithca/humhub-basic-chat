@@ -33,7 +33,9 @@ class Events extends \yii\base\Object
         }
         $event->sender->view->registerAssetBundle(Assets::className());
         $event->sender->addWidget(ChatFrame::className(), array(), array('sortOrder' => 0));
-
+        $event->sender->view->registerjsVar('chat_ListUsers', Url::to(['/humhub-chat/chat/users']));
+        $event->sender->view->registerjsVar('chat_Submit', Url::to(['/humhub-chat/chat/submit']));
+        $event->sender->view->registerjsVar('chat_GetChats', Url::to(['/humhub-chat/chat/chats']));
     }
 
      public static function onProfileSidebarInit($event)
