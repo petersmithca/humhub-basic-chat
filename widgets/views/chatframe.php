@@ -8,7 +8,6 @@ use humhub\models\Setting;
     <div class="panel-body">
         <div id="chatContainer">
 
-            <div id="chatTopBar" class="rounded"></div>
             <div id="chatLineHolder"></div>
 
             <div id="chatUsers" class="rounded"></div>
