@@ -3,10 +3,10 @@
 /* Main chat container */
 
 #chatContainer {
-    width: 100%;
-    margin-left: 12px auto;
-    margin-right:12px auto;
-    position: relative;
+  width: 100%;
+  margin-left: 12px auto;
+  margin-right: 12px auto;
+  position: relative;
 }
 
 
@@ -14,63 +14,63 @@
 
 
 #chatLineHolder {
-    height: 360px;
-    width: 75%;
-    background: #272833;
+  height: 360px;
+  width: 75%;
+  background: #272833;
 }
 
 .chat {
-    background: url('chat_line_bg.jpg') repeat-x #ddd;
-    min-height: 33px;
-    padding: 5px;
-    border: 1px solid #FFFFFF;
-    padding: 1px 5px 4px 37px;
-    position: relative;
-    margin: 5px 5px 5px 5px;
+  background: url('chat_line_bg.jpg') repeat-x #ddd;
+  min-height: 33px;
+  padding: 5px;
+  border: 1px solid #FFFFFF;
+  padding: 1px 5px 4px 37px;
+  position: relative;
+  margin: 5px 5px 5px 5px;
 }
 
-.chat:last-child{
-    margin-bottom:0;
+.chat:last-child {
+  margin-bottom: 0;
 }
 
-.chat span{
-    color:#777777;
-    font-size:12px;
+.chat span {
+  color: #777777;
+  font-size: 12px;
 }
 
 .chat .text {
-    color: #272833;
-    display: inline-block;
-    font-size: 13px;
-    overflow: hidden;
-    vertical-align: top;
-    width: 100%;
+  color: #272833;
+  display: inline-block;
+  font-size: 13px;
+  overflow: hidden;
+  vertical-align: top;
+  width: 100%;
 }
 
 .chat .gravatar {
-    background: url('http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?size=23') no-repeat;
-    left: 5px;
-    position: absolute;
-    top: 5px;
+  background: url('http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?size=23') no-repeat;
+  left: 5px;
+  position: absolute;
+  top: 5px;
 }
 
-.chat img{
-    display:block;
-    visibility:hidden;
+.chat img {
+  display: block;
+  visibility: hidden;
 }
 
 .chat .time {
-    color: #111111;
-    position: absolute;
-    right: 5px;
-    top: 2px;
-    font-size: 11px;
+  color: #111111;
+  position: absolute;
+  right: 5px;
+  top: 2px;
+  font-size: 11px;
 }
 
 .chat .author {
-    color: #337ab7;
-    margin-right: 6px;
-    font-size: 13px;
+  color: #337ab7;
+  margin-right: 6px;
+  font-size: 13px;
 }
 
 
@@ -78,29 +78,29 @@
 
 
 #chatUsers {
-    background-color: #272833;
-    height: 360px;
-    position: absolute;
-    right: 0;
-    top: 0px;
-    width: 24%;
+  background-color: #272833;
+  height: 360px;
+  position: absolute;
+  right: 0;
+  top: 0px;
+  width: 24%;
 }
 
 #chatUsers .user {
-    background: url('http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?size=30') no-repeat;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    float: left;
-    height: 23px;
-    margin: 5px 0 0 5px;
-    width: 23px;
+  background: url('http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?size=30') no-repeat;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  float: left;
+  height: 23px;
+  margin: 5px 0 0 5px;
+  width: 23px;
 }
 
-#chatUsers .user img{
-    border:1px solid #444444;
-    display:block;
-    visibility:hidden;
+#chatUsers .user img {
+  border: 1px solid #444444;
+  display: block;
+  visibility: hidden;
 }
 
 
@@ -108,68 +108,66 @@
 
 
 #chatBottomBar {
-    background: url('solid_gray.jpg') repeat-x #d0d0d0;
-    position: relative;
-    padding: 5px;
-    border: 1px solid #272833;
+  background: url('solid_gray.jpg') repeat-x #d0d0d0;
+  position: relative;
+  padding: 5px;
+  border: 1px solid #272833;
 }
 
-#chatBottomBar .tip{
-    position:absolute;
-    width:0;
-    height:0;
-    border:5px solid transparent;
-    border-bottom-color:#eeeeee;
-    top:-10px;
-    left:10px;
+#chatBottomBar .tip {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  border-bottom-color: #eeeeee;
+  top: -10px;
+  left: 10px;
 }
 
 #chatContainer input {
-    background: url('input_bg.jpg') repeat-x #dcdcdc;
-    height: 29px;
-    font: 13px/26px Calibri,Arial,sans-serif;
-    color: #272833;
-    border: 1px solid;
-    border-color: #272833;
-    padding: 0 5px;
-    margin-right: 5px;
-    width: 75%;
-    outline: none;
+  background: url('input_bg.jpg') repeat-x #dcdcdc;
+  height: 29px;
+  font: 13px/26px Calibri,Arial,sans-serif;
+  color: #272833;
+  border: 1px solid;
+  border-color: #272833;
+  padding: 0 5px;
+  margin-right: 5px;
+  width: 75%;
+  outline: none;
 }
 
-
-
-input#chatText{
+input#chatText {
     /* The chat submit text field */
-    width:75%;
+  width: 75%;
 }
 
 
 /* Overloading the default styles of jScrollPane */
 
 
-.jspVerticalBar{
-    background:none;
-    width:20px;
+.jspVerticalBar {
+  background: none;
+  width: 20px;
 }
 
-.jspTrack{
-    background-color:#202020;
-    border:1px solid #111111;
-    width:3px;
-    right:-10px;
+.jspTrack {
+  background-color: #202020;
+  border: 1px solid #111111;
+  width: 3px;
+  right: -10px;
 }
 
 .jspDrag {
-    background:url('slider.png') no-repeat;
-    width:20px;
-    left:-9px;
-    height:20px !important;
-    margin-top:-5px;
+  background: url('slider.png') no-repeat;
+  width: 20px;
+  left: -9px;
+  height: 20px !important;
+  margin-top: -5px;
 }
 
-.jspDrag:hover{
-    background-position:left bottom;
+.jspDrag:hover {
+  background-position: left bottom;
 }
 
 
@@ -177,50 +175,51 @@ input#chatText{
 
 
 #chatContainer .blueButton {
-    background: url('button_blue.png') no-repeat;
-    border: none !important;
-    color: #f5f5f5 !important;
-    display: inline-block;
-    font-size: 13px;
-    height: 29px;
-    text-align: center;
-    width: 75px;
-    margin: 0;
-    margin-left: 12px;
-    cursor: pointer;
+  background: url('button_blue.png') no-repeat;
+  border: none !important;
+  color: #f5f5f5 !important;
+  display: inline-block;
+  font-size: 13px;
+  height: 29px;
+  text-align: center;
+  width: 75px;
+  margin: 0;
+  margin-left: 12px;
+  cursor: pointer;
 }
 
-#chatContainer .blueButton:hover{
-    background-position:left bottom;
+#chatContainer .blueButton:hover {
+  background-position: left bottom;
 }
 
 p.noChats, #chatUsers .count {
-    clear: both;
-    font-size: 12px;
-    padding: 12px;
-    text-align: center;
+  clear: both;
+  font-size: 12px;
+  color: #999;
+  padding: 12px;
+  text-align: center;
 }
 
 #chatUsers .count {
-    font-size: 12px;
-    color:#999;
+  font-size: 12px;
+  color: #999;
 }
 
 .rounded {
-    -moz-border-radius: 0px;
-    -webkit-border-radius: 0px;
-    border-radius: 0px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
 }
 
-#chatErrorMessage{
-    width:100%;
-    top:0;
-    left:0;
-    position:fixed;
-    background-color:#ab0909;
-    border-bottom:1px solid #d32a2a;
-    font-size:23px;
-    padding:16px;
-    text-align:center;
-    color:#fff;
+#chatErrorMessage {
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  background-color: #ab0909;
+  border-bottom: 1px solid #d32a2a;
+  font-size: 23px;
+  padding: 16px;
+  text-align: center;
+  color: #fff;
 }
