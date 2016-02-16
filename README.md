@@ -11,5 +11,5 @@ If you do not want one or more of these, its best to just edit the config and re
 
 ## Installation
 1. Download the module and upload it to your modules directory >yourdomain.com>protected>modules
-2. Rename module directory ```basic-chat```
+2. Rename module directory ```basic-chat``` (May not be required!)
 3. Enable module from >Admin>Modules
