@@ -8,3 +8,10 @@ Integrates with users to get avatar and username for display.
 Widget now works on spaces, dashboard and profile, thanks to contributions from @WebCrew for styling and making more size agnostic
 
 If you do not want one or more of these, its best to just edit the config and remove the lines for the section you dont want.
+
+
+If You want to have a lighter themed chat style:
+
+* delete assets/chat.css
+* rename assets/chat.css.bright to chat.css
+* have fun :)
