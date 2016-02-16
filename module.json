@@ -1,6 +1,6 @@
 {
-    "id": "humhub-chat",
-    "name": "humhub-chat",
+    "id": "basic-chat",
+    "name": "Basic Chat",
     "description": "Adds Chat Functionality.",
     "keywords": ["chat"],
     "version": "0.1.0",
