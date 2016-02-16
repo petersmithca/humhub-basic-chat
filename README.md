@@ -9,6 +9,12 @@ Widget now works on spaces, dashboard and profile, thanks to contributions from 
 
 If you do not want one or more of these, its best to just edit the config and remove the lines for the section you dont want.
 
+If You want to have a lighter themed chat style:
+
+* delete assets/chat.css
+* rename assets/chat.css.bright to chat.css
+* have fun :)
+
 ## Installation
 1. Download the module and upload it to your modules directory >yourdomain.com>protected>modules
 2. Rename module directory ```basic-chat``` (May not be required!)
