@@ -4,6 +4,7 @@ namespace humhub\modules\humhubchat\controllers;
 use Yii;
 use humhub\modules\User\models\User;
 use humhub\modules\humhubchat\models\UserChatMessage;
+use yii\helpers\Url;
 
 class ChatController extends \humhub\components\Controller
 {
@@ -22,67 +23,59 @@ class ChatController extends \humhub\components\Controller
      */
     public function actionChats()
     {
-        $data = Yii::$app->request->get();
-        $lastId = $data['lastID'];
-        $query = UserChatMessage::find();
-        $query->where([
+        $last_id = Yii::$app->request->get('lastID', 0);
+        $query = UserChatMessage::find()->where([
             '>',
             'id',
-            $lastId
-        ]);
-        $query->asArray(true);
-        $results = $query->all();
-        $chats = array();
-        foreach ($results as $chat) {
-            
-            // Returning the GMT (UTC) time of the chat creation:
-            
-            $chat['time'] = array(
-                'hours' => gmdate('H', strtotime($chat['ts'])),
-                'minutes' => gmdate('i', strtotime($chat['ts']))
-            );
-            
-            $chats[] = $chat;
+            $last_id
+        ])->asArray(true);
+        
+        $response = [];
+        foreach ($query->all() as $chat) {
+            $chat['time'] = [
+                'date' => Yii::$app->formatter->asDate($chat['ts']),
+                'time' => Yii::$app->formatter->asTime($chat['ts'], 'php:H:i'),
+                'datetime' => Yii::$app->formatter->asDatetime($chat['ts'])
+            ];
+            $response[] = $chat;
         }
         
         Yii::$app->response->format = 'json';
-        return [
-            'chats' => $chats
-        ];
+        return $response;
     }
 
     public function actionSubmit()
     {
-        $data = Yii::$app->request->get();
-        $messageText = $data["chatText"];
+        if (($message_text = Yii::$app->request->get('chatText', null)) == null) {
+            // if nothing was submitted
+            return;
+        }
         
-        $query = User::find();
-        $query->where([
-            'id' => Yii::$app->user->id
-        ]);
-        $user = $query->one();
+        $user = Yii::$app->user->getIdentity();
         
         $chat = new UserChatMessage();
-        $chat->text = $messageText;
-        $chat->author = $user->username;
-        $chat->gravatar = '/uploads/profile_image/' . $user->guid . '.jpg';
+        $chat->text = $message_text;
+        $chat->author = $user->displayName;
+        $chat->gravatar = $user->getProfileImage()->getUrl();
         $chat->save();
     }
 
     public function actionUsers()
     {
-        $onlineUsers = \humhub\modules\user\components\Session::getOnlineUsers()->asArray(true)->all();
-        $users = array();
-        foreach ($onlineUsers as $onlineUser) {
-            $user = array();
-            $user['name'] = $onlineUser['username'];
-            $user['gravatar'] = '/uploads/profile_image/' . $onlineUser['guid'] . '.jpg';
-            $users[] = $user;
+        $query = \humhub\modules\user\components\Session::getOnlineUsers();
+        $response = [];
+        foreach ($query->all() as $user) {
+            $response[] = [
+                'name' => $user->displayName,
+                'gravatar' => $user->getProfileImage()->getUrl(),
+                'profile' => Url::toRoute([
+                    '/profile',
+                    'uguid' => $user->guid
+                ])
+            ];
         }
         
         Yii::$app->response->format = 'json';
-        return [
-            'users' => $users
-        ];
+        return $response;
     }
 }

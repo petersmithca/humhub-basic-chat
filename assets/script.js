@@ -37,7 +37,8 @@ var chat = {
 
 		// Submitting a new chat entry:
 
-		$('#submitForm').submit(function(){
+		$('#submitForm').submit(function(e){
+			e.preventDefault();
 
 			var text = $('#chatText').val();
 
@@ -134,20 +135,8 @@ var chat = {
 
 	addChatLine : function(params){
 
-		// All times are displayed in the user's timezone
-
-		var d = new Date();
-		if(params.time) {
-
-			// PHP returns the time in UTC (GMT). We use it to feed the date
-			// object and later output it in the user's timezone. JavaScript
-			// internally converts it for us.
-
-			d.setUTCHours(params.time.hours,params.time.minutes);
-		}
-
-		params.time = (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+
-					  (d.getMinutes() < 10 ? '0':'') + d.getMinutes();
+		if(params.time)
+			params.time = params.time.datetime;
 
 		var markup = chat.render('chatLine',params),
 			exists = $('#chatLineHolder .chat-'+params.id);
@@ -189,13 +178,13 @@ var chat = {
             data: {lastID: chat.data.lastID},
             datatype: 'json',
             success:function(r){
-                for(var i=0;i<r.chats.length;i++){
-					chat.addChatLine(r.chats[i]);
+                for(var i=0;i<r.length;i++){
+					chat.addChatLine(r[i]);
 				}
 
-				if(r.chats.length){
+				if(r.length){
 					chat.data.noActivity = 0;
-					chat.data.lastID = r.chats[i-1].id;
+					chat.data.lastID = r[i-1].id;
 				}
 				else{
 					// If no chats were received, increment
@@ -242,19 +231,19 @@ var chat = {
             success:function(r){
                 var users = [];
 
-                for(var i=0; i< r.users.length;i++){
-                    if(r.users[i]){
-                        users.push(chat.render('user',r.users[i]));
+                for(var i=0; i< r.length;i++){
+                    if(r[i]){
+                        users.push(chat.render('user',r[i]));
                     }
                 }
 
                 var message = '';
 
-                if(r.users.length<1){
+                if(r.length<1){
                     message = 'No one is online';
                 }
                 else {
-                    message = r.users.length+' '+(r.users.length == 1 ? 'person':'people')+' online';
+                    message = r.length+' '+(r.length == 1 ? 'person':'people')+' online';
                 }
 
                 users.push('<p class="count">'+message+'</p>');
