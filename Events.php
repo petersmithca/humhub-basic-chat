@@ -58,7 +58,7 @@ class Events extends \yii\base\Object
             'label' => Yii::t('Humhub-chatModule.base', 'Humhub-Chat'),
             'url' => Url::toRoute('/humhub-chat/admin/index'),
             'group' => 'settings',
-            'icon' => '<i class="fa fa-external-link"></i>',
+            'icon' => '<i class="fa fa-weixin"></i>',
             'isActive' => Yii::$app->controller->module && Yii::$app->controller->module->id == 'humhub-chat' && Yii::$app->controller->id == 'admin',
             'sortOrder' => 650
         ]);
