@@ -2,12 +2,29 @@
 use yii\db\Schema;
 use yii\db\Migration;
 use humhub\modules\humhubchat\models\UserChatMessage;
+use humhub\models\ModuleEnabled;
 
-class m151210_181254_create extends Migration
+class m160219_120621_usage_of_humhub_stuff extends Migration
 {
 
     public function up()
     {
+        $this->dropTable(UserChatMessage::tableName());
+        
+        $this->createTable(UserChatMessage::tableName(), [
+            'id' => $this->primaryKey(),
+            'message' => $this->text()
+                ->notNull(),
+            'created_at' => $this->dateTime()
+                ->notNull(),
+            'created_by' => $this->integer()
+                ->notNull()
+        ]);
+    }
+
+    public function down()
+    {
+        $this->dropTable(UserChatMessage::tableName());
         $this->createTable(UserChatMessage::tableName(), [
             'id' => $this->primaryKey(),
             'author' => $this->string(16)
@@ -20,11 +37,6 @@ class m151210_181254_create extends Migration
                 ->notNull()
                 ->defaultValue('CURRENT_TIMESTAMP')
         ]);
-    }
-
-    public function down()
-    {
-        $this->dropTable(UserChatMessage::tableName());
         return true;
     }
 }

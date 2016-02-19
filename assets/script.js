@@ -30,11 +30,6 @@ var chat = {
 			verticalDragMaxHeight : 12
 		}).data('jsp');
 
-		// We use the working variable to prevent
-		// multiple form submissions:
-
-		var working = false;
-
 		// Submitting a new chat entry:
 
 		$('#submitForm').submit(function(e) {
@@ -46,37 +41,14 @@ var chat = {
 				return false;
 			}
 
-			if (working)
-				return false;
-			working = true;
-
-			// Assigning a temporary ID to the chat:
-			var tempID = 't' + Math.round(Math.random() * 1000000), params = {
-				id : tempID,
-				author : chat.data.name,
-				gravatar : chat.data.gravatar,
-				text : text.replace(/</g, '&lt;').replace(/>/g, '&gt;')
-			};
-
-			// Using our addChatLine method to add the chat
-			// to the screen immediately, without waiting for
-			// the AJAX request to complete:
-
-			chat.addChatLine($.extend({}, params));
-
 			// Using our tzPOST wrapper method to send the chat
 			// via a POST AJAX request:
-
 			$.ajax({
 				url : chat_Submit,
+				method: "POST",
 				data : $(this).serialize(),
 				success : function(r) {
-					working = false;
 					$('#chatText').val('');
-					$('div.chat-' + tempID).remove();
-
-					params['id'] = r.insertID;
-					chat.addChatLine($.extend({}, params));
 				}
 			});
 
@@ -111,20 +83,18 @@ var chat = {
 
 		case 'chatLine':
 			arr = [
-					'<div class="chat chat-',
-					params.id,
-					' rounded"><span class="gravatar"><img src="',
-					params.gravatar,
-					'" width="23" height="23" onload="this.style.visibility=\'visible\'" />',
-					'</span><span class="author">', params.author,
-					':</span><span class="text">', params.text,
+					'<div class="chat chat-', params.id,' rounded"><span class="gravatar"><a href="',params.author.profile,'"><img src="',
+					params.author.gravatar, '" width="23" height="23" onload="this.style.visibility=\'visible\'" /></a>',
+					'</span><span class="author"><a href="',params.author.profile,'">', params.author.name,'</a>',
+					':</span><span class="text">', params.message,
 					'</span><span class="time">', params.time, '</span></div>' ];
 			break;
 
 		case 'user':
-			arr = [ '<div class="user" title="', params.name, '"><img src="',
-					params.gravatar,
-					'" width="23" height="23" onload="this.style.visibility=\'visible\'" /></div>' ];
+			arr = [
+					'<div class="user" title="', params.name, '"><a href="',
+					params.profile, '"><img src="', params.gravatar,
+					'" width="23" height="23" onload="this.style.visibility=\'visible\'" /></a></div>' ];
 			break;
 		}
 
@@ -138,10 +108,17 @@ var chat = {
 	// The addChatLine method ads a chat entry to the page
 
 	addChatLine : function(params) {
-
-		if (params.time)
-			params.time = params.time.datetime;
-
+		// All times are displayed in the user's timezone
+		var d = new Date();
+		if(params.time) {
+			// PHP returns the time in UTC (GMT). We use it to feed the date
+			// object and later output it in the user's timezone. JavaScript
+			// internally converts it for us.
+			d.setUTCHours(params.time.hours,params.time.minutes);
+		}
+		params.time = (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+
+					  (d.getMinutes() < 10 ? '0':'') + d.getMinutes();
+		
 		var markup = chat.render('chatLine', params), exists = $('#chatLineHolder .chat-'
 				+ params.id);
 
@@ -195,7 +172,6 @@ var chat = {
 				} else {
 					// If no chats were received, increment
 					// the noActivity counter.
-
 					chat.data.noActivity++;
 				}
 
@@ -206,7 +182,6 @@ var chat = {
 
 				// Setting a timeout for the next request,
 				// depending on the chat activity:
-
 				var nextRequest = 1000;
 
 				// 2 seconds
@@ -232,37 +207,21 @@ var chat = {
 	// Requesting a list with all the users.
 
 	getUsers : function(callback) {
-		$
-				.ajax({
-					url : chat_ListUsers,
-					datatype : 'json',
-					success : function(r) {
-						var users = [];
-
-						for (var i = 0; i < r.length; i++) {
-							if (r[i]) {
-								users.push(chat.render('user', r[i]));
-							}
-						}
-
-						var message = '';
-
-						if (r.length < 1) {
-							message = 'No one is online';
-						} else {
-							message = r.length + ' '
-									+ (r.length == 1 ? 'person' : 'people')
-									+ ' online';
-						}
-
-						users.push('<p class="count">' + message + '</p>');
-
-						$('#chatUsers').html(users.join(''));
-
-						setTimeout(callback, 15000);
+		$.ajax({
+			url : chat_ListUsers,
+			datatype : 'json',
+			success : function(r) {
+				var users = [];
+				for (var i = 0; i < r.users.length; i++) {
+					if (r.users[i]) {
+						users.push(chat.render('user', r.users[i]));
 					}
-				});
-
+				}
+				users.push('<p class="count">' + r.online + '</p>');
+				$('#chatUsers').html(users.join(''));
+				setTimeout(callback, 15000);
+			}
+		});
 	},
 
 	// This method displays an error message on the top of the page:
@@ -286,16 +245,6 @@ var chat = {
 		elem.hide().appendTo('body').slideDown();
 	}
 };
-
-// Custom GET & POST wrappers:
-
-$.tzPOST = function(action, data, callback) {
-	// $.post('php/ajax.php?action='+action,data,callback,'json');
-}
-
-$.tzGET = function(action, data, callback) {
-	$.get(action, data, callback, 'json');
-}
 
 // A custom jQuery method for placeholder text:
 

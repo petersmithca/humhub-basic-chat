@@ -7,12 +7,11 @@ use Yii;
  * This is the model class for table "user_chat_message".
  *
  * @property integer $id
- * @property string $author
- * @property string $gravatar
- * @property string $text
- * @property string $ts
+ * @property string $message
+ * @property string $created_at
+ * @property integer $created_by
  */
-class UserChatMessage extends \yii\db\ActiveRecord
+class UserChatMessage extends \humhub\components\ActiveRecord
 {
 
     public static function tableName()
@@ -25,44 +24,33 @@ class UserChatMessage extends \yii\db\ActiveRecord
         return [
             [
                 [
-                    'author',
-                    'gravatar',
-                    'text'
+                    'message'
                 ],
                 'required'
             ],
             [
                 [
-                    'ts'
+                    'message'
                 ],
                 'safe'
-            ],
-            [
-                [
-                    'author'
-                ],
-                'string',
-                'max' => 16
-            ],
-            [
-                [
-                    'gravatar',
-                    'text'
-                ],
-                'string',
-                'max' => 255
             ]
         ];
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(\humhub\modules\user\models\User::className(), [
+            'id' => 'created_by'
+        ]);
     }
 
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'author' => 'Author',
-            'gravatar' => 'Gravatar',
-            'text' => 'Text',
-            'ts' => 'Ts'
+            'id' => Yii::t('Humhub-chatModule.base', 'ID'),
+            'message' => Yii::t('Humhub-chatModule.base', 'message'),
+            'created_at' => Yii::t('Humhub-chatModule.base', 'created'),
+            'created_by' => Yii::t('Humhub-chatModule.base', 'author')
         ];
     }
 }

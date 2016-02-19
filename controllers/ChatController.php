@@ -28,16 +28,26 @@ class ChatController extends \humhub\components\Controller
             '>',
             'id',
             $last_id
-        ])->asArray(true);
+        ]);
         
         $response = [];
-        foreach ($query->all() as $chat) {
-            $chat['time'] = [
-                'date' => Yii::$app->formatter->asDate($chat['ts']),
-                'time' => Yii::$app->formatter->asTime($chat['ts'], 'php:H:i'),
-                'datetime' => Yii::$app->formatter->asDatetime($chat['ts'])
+        foreach ($query->all() as $entry) {
+            $response[] = [
+                'id' => $entry->id,
+                'message' => $entry->message,
+                'author' => [
+                    'name' => $entry->user->displayName,
+                    'gravatar' => $entry->user->getProfileImage()->getUrl(),
+                    'profile' => Url::toRoute([
+                        '/profile',
+                        'uguid' => $entry->user->guid
+                    ])
+                ],
+                'time' => [
+                    'hours' => Yii::$app->formatter->asTime($entry->created_at, 'php:H'),
+                    'minutes' => Yii::$app->formatter->asTime($entry->created_at, 'php:i')
+                ]
             ];
-            $response[] = $chat;
         }
         
         Yii::$app->response->format = 'json';
@@ -46,17 +56,12 @@ class ChatController extends \humhub\components\Controller
 
     public function actionSubmit()
     {
-        if (($message_text = Yii::$app->request->get('chatText', null)) == null) {
+        if (($message_text = Yii::$app->request->post('chatText', null)) == null) {
             // if nothing was submitted
             return;
         }
-        
-        $user = Yii::$app->user->getIdentity();
-        
         $chat = new UserChatMessage();
-        $chat->text = $message_text;
-        $chat->author = $user->displayName;
-        $chat->gravatar = $user->getProfileImage()->getUrl();
+        $chat->message = $message_text;
         $chat->save();
     }
 
@@ -76,6 +81,11 @@ class ChatController extends \humhub\components\Controller
         }
         
         Yii::$app->response->format = 'json';
-        return $response;
+        return [
+            'online' => Yii::t('Humhub-chatModule.base', count($response) == 1 ? '{count} person online' : '{count} people online', [
+                '{count}' => count($response)
+            ]),
+            'users' => $response
+        ];
     }
 }
