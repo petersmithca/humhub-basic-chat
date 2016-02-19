@@ -3,6 +3,7 @@ use yii\db\Schema;
 use yii\db\Migration;
 use humhub\modules\humhubchat\models\UserChatMessage;
 use humhub\models\ModuleEnabled;
+use humhub\models\Setting;
 
 class m160219_120621_usage_of_humhub_stuff extends Migration
 {
@@ -20,6 +21,9 @@ class m160219_120621_usage_of_humhub_stuff extends Migration
             'created_by' => $this->integer()
                 ->notNull()
         ]);
+        
+        Setting::Set('theme', 'theme_bright.css', 'humhubchat');
+        Setting::Set('timeout', '1', 'humhubchat');
     }
 
     public function down()
