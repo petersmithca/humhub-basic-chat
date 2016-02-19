@@ -1,0 +1,217 @@
+/* start - new modern flat style by Andreas Holzer / WebCrew */
+/* Main chat container */
+
+#chatContainer {
+  width: 100%;
+  margin-left: 12px auto;
+  margin-right: 12px auto;
+  position: relative;
+}
+
+
+/* Chats */
+
+
+#chatLineHolder {
+  height: 360px;
+  width: 75%;
+  background: #272833;
+}
+
+.chat {
+  background: #f7f7f7;
+  min-height: 33px;
+  padding: 5px;
+  border: 1px solid #eee;
+  padding: 1px 5px 4px 37px;
+  position: relative;
+  margin: 5px 5px 5px 5px;
+}
+
+.chat:last-child {
+  margin-bottom: 0;
+}
+
+.chat span {
+  color: #777777;
+  font-size: 12px;
+}
+
+.chat .text {
+  color: #272833;
+  display: inline-block;
+  font-size: 13px;
+  overflow: hidden;
+  vertical-align: top;
+  width: 100%;
+}
+
+.chat .gravatar {
+  background: url('http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?size=23') no-repeat;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  left: 5px;
+  position: absolute;
+  top: 5px;
+}
+
+.chat img {
+  display: block;
+  visibility: hidden;
+}
+
+.chat .time {
+  color: #111111;
+  position: absolute;
+  right: 5px;
+  top: 2px;
+  font-size: 11px;
+}
+
+.chat .author {
+  color: #337ab7;
+  margin-right: 6px;
+  font-size: 13px;
+}
+
+
+/* Chat User Area */
+
+
+#chatUsers {
+  background-color: #272833;
+  height: 360px;
+  position: absolute;
+  right: 0;
+  top: 0px;
+  width: 25%;
+  border-left: 5px solid #f7f7f7;
+}
+
+#chatUsers .user {
+  background: url('http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?size=23') no-repeat;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  float: left;
+  height: 23px;
+  margin: 5px 0 0 5px;
+  width: 23px;
+}
+
+#chatUsers .user img {
+  border: 1px solid #444444;
+  display: block;
+  visibility: hidden;
+}
+
+
+/* Bottom Bar */
+
+
+#chatBottomBar {
+  background: #f7f7f7;
+  position: relative;
+  padding: 5px;
+  border: 1px solid #272833;
+  border-top: none;
+}
+
+#chatContainer input {
+    height: 36px;
+    font: 13px/26px Calibri,Arial,sans-serif;
+    color: #272833;
+    border: 1px solid;
+    border-color: #272833;
+    padding: 0 5px;
+    width: 100%;
+    outline: none;
+}
+
+input#chatText {
+    /* The chat submit text field */
+  width: 100%;
+}
+
+
+/* Overloading the default styles of jScrollPane */
+
+
+.jspVerticalBar {
+  background: none;
+  width: 20px;
+}
+
+.jspTrack {
+  background-color: #202020;
+  border: 1px solid #111111;
+  width: 3px;
+  right: -10px;
+}
+
+.jspDrag {
+  background: url('slider.png') no-repeat;
+  width: 20px;
+  left: -9px;
+  height: 20px !important;
+  margin-top: -5px;
+}
+
+.jspDrag:hover {
+  background-position: left bottom;
+}
+
+
+/* Additional styles */
+
+
+#chatContainer .blueButton {
+  background: url('button_blue.png') no-repeat;
+  border: none !important;
+  color: #f5f5f5 !important;
+  display: inline-block;
+  font-size: 13px;
+  height: 29px;
+  text-align: center;
+  width: 75px;
+  margin: 0;
+  margin-left: 12px;
+  cursor: pointer;
+}
+
+#chatContainer .blueButton:hover {
+  background-position: left bottom;
+}
+
+p.noChats, #chatUsers .count {
+  clear: both;
+  font-size: 12px;
+  color: #999;
+  padding: 12px;
+  text-align: center;
+}
+
+#chatUsers .count {
+  font-size: 12px;
+  color: #999;
+}
+
+.rounded {
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+}
+
+#chatErrorMessage {
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  background-color: #ab0909;
+  border-bottom: 1px solid #d32a2a;
+  font-size: 23px;
+  padding: 16px;
+  text-align: center;
+  color: #fff;
+}
