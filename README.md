@@ -24,9 +24,9 @@ In `Administration -> Humhub-Chat` you can choose between two basic themes and d
 ## Authors
 
 __Module website:__ <https://github.com/petersmithca/humhub-basic-chat>  
-__Author:__ tobciu    
-__Author website:__ [https://github.com/tobciu](https://github.com/tobciu)    
 __Author:__ petersmithca    
+__Author website:__ [https://github.com/tobciu](https://github.com/tobciu)    
+__Author:__ tobciu    
 __Author website:__ [https://github.com/petersmithca](https://github.com/petersmithca)    
 __Author:__ Felli    
 __Author website:__ [https://github.com/Felli](https://github.com/Felli)    
