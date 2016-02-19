@@ -19,7 +19,7 @@ return [
             'event' => \humhub\modules\dashboard\widgets\Sidebar::EVENT_INIT,
             'callback' => array(
                 'humhub\modules\humhubchat\Events',
-                'onDashboardSidebarInit'
+                'addChatFrame'
             )
         ],
         [
@@ -27,7 +27,7 @@ return [
             'event' => \humhub\modules\space\widgets\Sidebar::EVENT_INIT,
             'callback' => array(
                 'humhub\modules\humhubchat\Events',
-                'onSpaceSidebarInit'
+                'addChatFrame'
             )
         ],
         [
@@ -35,8 +35,16 @@ return [
             'event' => \humhub\modules\user\widgets\ProfileSidebar::EVENT_INIT,
             'callback' => array(
                 'humhub\modules\humhubchat\Events',
-                'onProfileSidebarInit'
+                'addChatFrame'
             )
+        ],
+        [
+            'class' => \humhub\modules\admin\widgets\AdminMenu::className(),
+            'event' => \humhub\modules\admin\widgets\AdminMenu::EVENT_INIT,
+            'callback' => [
+                'humhub\modules\humhubchat\Events',
+                'onAdminMenuInit'
+            ]
         ]
     ]
 ];
