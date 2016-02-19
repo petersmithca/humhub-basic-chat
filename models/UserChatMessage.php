@@ -1,5 +1,4 @@
 <?php
-
 namespace humhub\modules\humhubchat\models;
 
 use Yii;
@@ -15,6 +14,7 @@ use Yii;
  */
 class UserChatMessage extends \yii\db\ActiveRecord
 {
+
     /**
      * @inheritdoc
      */
@@ -29,10 +29,35 @@ class UserChatMessage extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['author', 'gravatar', 'text'], 'required'],
-            [['ts'], 'safe'],
-            [['author'], 'string', 'max' => 16],
-            [['gravatar', 'text'], 'string', 'max' => 255]
+            [
+                [
+                    'author',
+                    'gravatar',
+                    'text'
+                ],
+                'required'
+            ],
+            [
+                [
+                    'ts'
+                ],
+                'safe'
+            ],
+            [
+                [
+                    'author'
+                ],
+                'string',
+                'max' => 16
+            ],
+            [
+                [
+                    'gravatar',
+                    'text'
+                ],
+                'string',
+                'max' => 255
+            ]
         ];
     }
 
@@ -46,7 +71,7 @@ class UserChatMessage extends \yii\db\ActiveRecord
             'author' => 'Author',
             'gravatar' => 'Gravatar',
             'text' => 'Text',
-            'ts' => 'Ts',
+            'ts' => 'Ts'
         ];
     }
 }

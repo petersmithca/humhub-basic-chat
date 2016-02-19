@@ -1,6 +1,6 @@
 <?php
-
 namespace humhub\modules\humhubchat\controllers;
+
 use Yii;
 use yii\helpers\Url;
 use yii\web\HttpException;
@@ -17,7 +17,7 @@ class ChatController extends Controller
     {
         return [
             'acl' => [
-                'class' => \humhub\components\behaviors\AccessControl::className(),
+                'class' => \humhub\components\behaviors\AccessControl::className()
             ]
         ];
     }
@@ -30,34 +30,42 @@ class ChatController extends Controller
         $data = Yii::$app->request->get();
         $lastId = $data['lastID'];
         $query = UserChatMessage::find();
-        $query->where(['>', 'id', $lastId]);
+        $query->where([
+            '>',
+            'id',
+            $lastId
+        ]);
         $query->asArray(true);
         $results = $query->all();
         $chats = array();
         foreach ($results as $chat) {
-
+            
             // Returning the GMT (UTC) time of the chat creation:
-
+            
             $chat['time'] = array(
-              'hours'   => gmdate('H',strtotime($chat['ts'])),
-              'minutes' => gmdate('i',strtotime($chat['ts']))
+                'hours' => gmdate('H', strtotime($chat['ts'])),
+                'minutes' => gmdate('i', strtotime($chat['ts']))
             );
-
+            
             $chats[] = $chat;
-          }
-
-          return json_encode(array('chats' => $chats));
+        }
+        
+        return json_encode(array(
+            'chats' => $chats
+        ));
     }
 
     public function actionSubmit()
     {
         $data = Yii::$app->request->get();
         $messageText = $data["chatText"];
-
+        
         $query = User::find();
-        $query->where(['id' => Yii::$app->user->id]);
+        $query->where([
+            'id' => Yii::$app->user->id
+        ]);
         $user = $query->one();
-
+        
         $chat = new UserChatMessage();
         $chat->text = $messageText;
         $chat->author = $user->username;
@@ -75,8 +83,8 @@ class ChatController extends Controller
             $user['gravatar'] = '/uploads/profile_image/' . $onlineUser['guid'] . '.jpg';
             $users[] = $user;
         }
-        return json_encode(array('users' => $users));
+        return json_encode(array(
+            'users' => $users
+        ));
     }
-
-
 }

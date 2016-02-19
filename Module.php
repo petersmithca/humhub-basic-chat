@@ -1,5 +1,4 @@
 <?php
-
 namespace humhub\modules\humhubchat;
 
 use yii\helpers\Url;
@@ -17,5 +16,4 @@ class Module extends \humhub\modules\content\components\ContentContainerModule
     {
         parent::disable();
     }
-
 }

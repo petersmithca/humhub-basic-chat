@@ -1,5 +1,4 @@
 <?php
-
 namespace humhub\modules\humhubchat;
 
 use yii\web\AssetBundle;
@@ -9,13 +8,13 @@ class Assets extends AssetBundle
 
     public $css = [
         'chat.css',
-        'jScrollPane.css',
+        'jScrollPane.css'
     ];
 
     public $js = [
         'jquery.mousewheel.js',
         'jScrollPane.min.js',
-        'script.js',
+        'script.js'
     ];
 
     public function init()
@@ -23,5 +22,4 @@ class Assets extends AssetBundle
         $this->sourcePath = dirname(__FILE__) . '/assets';
         parent::init();
     }
-
 }
