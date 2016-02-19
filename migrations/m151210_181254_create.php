@@ -16,9 +16,7 @@ class m151210_181254_create extends Migration
                 ->notNull(),
             'text' => $this->string(255)
                 ->notNull(),
-            'ts' => $this->timestamp()
-                ->notNull()
-                ->defaultValue('CURRENT_TIMESTAMP')
+            'ts' => 'timestamp NOT NULL default CURRENT_TIMESTAMP'
         ]);
     }
 
