@@ -189,7 +189,6 @@ var chat = {
             data: {lastID: chat.data.lastID},
             datatype: 'json',
             success:function(r){
-            	r = JSON.parse(r);
                 for(var i=0;i<r.chats.length;i++){
 					chat.addChatLine(r.chats[i]);
 				}
@@ -241,7 +240,6 @@ var chat = {
 		$.ajax({url: chat_ListUsers,
             datatype: 'json',
             success:function(r){
-                r = JSON.parse(r);
                 var users = [];
 
                 for(var i=0; i< r.users.length;i++){

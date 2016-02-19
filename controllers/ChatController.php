@@ -45,9 +45,10 @@ class ChatController extends \humhub\components\Controller
             $chats[] = $chat;
         }
         
-        return json_encode(array(
+        Yii::$app->response->format = 'json';
+        return [
             'chats' => $chats
-        ));
+        ];
     }
 
     public function actionSubmit()
@@ -78,8 +79,10 @@ class ChatController extends \humhub\components\Controller
             $user['gravatar'] = '/uploads/profile_image/' . $onlineUser['guid'] . '.jpg';
             $users[] = $user;
         }
-        return json_encode(array(
+        
+        Yii::$app->response->format = 'json';
+        return [
             'users' => $users
-        ));
+        ];
     }
 }
