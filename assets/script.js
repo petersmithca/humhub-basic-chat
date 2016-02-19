@@ -34,9 +34,13 @@ var chat = {
 		$('#submitForm').submit(function(e) {
 			e.preventDefault();
 
+			$('#chatContainer #submitForm button').addClass('disabled');
+			$('#chatContainer #submitForm button .spinner').removeClass('hidden');
+			
 			var text = $('#chatText').val();
-
 			if (text.length == 0) {
+				$('#chatContainer #submitForm button .spinner').addClass('hidden');
+				$('#chatContainer #submitForm button').removeClass('disabled');
 				return false;
 			}
 
@@ -48,6 +52,9 @@ var chat = {
 				data : $(this).serialize(),
 				success : function(r) {
 					$('#chatText').val('');
+					
+					$('#chatContainer #submitForm button .spinner').addClass('hidden');
+					$('#chatContainer #submitForm button').removeClass('disabled');
 				}
 			});
 
