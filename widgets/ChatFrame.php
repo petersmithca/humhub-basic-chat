@@ -10,7 +10,7 @@ class ChatFrame extends Widget
 
     public function run()
     {
-        return $this->render('chatframe', array());
+        return $this->render('chatframe', []);
     }
 }
 

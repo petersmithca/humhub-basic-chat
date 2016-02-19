@@ -2,15 +2,10 @@
 namespace humhub\modules\humhubchat\controllers;
 
 use Yii;
-use yii\helpers\Url;
-use yii\web\HttpException;
-use humhub\components\Controller;
-use humhub\modules\file\models\File;
 use humhub\modules\User\models\User;
-use humhub\models\Setting;
 use humhub\modules\humhubchat\models\UserChatMessage;
 
-class ChatController extends Controller
+class ChatController extends \humhub\components\Controller
 {
 
     public function behaviors()

@@ -5,23 +5,10 @@ use Yii;
 use yii\helpers\Url;
 use humhub\modules\humhubchat\widgets\ChatFrame;
 use humhub\modules\humhubchat\Assets;
-use humhub\modules\humhubchat\controllers\ChatController;
 use humhub\modules\humhubchat\models\UserChatMessage;
 
-/**
- * Description of Events
- *
- * @author luke
- */
 class Events extends \yii\base\Object
 {
-
-    public static function onTopMenuInit($event)
-    {
-        if (Yii::$app->user->isGuest) {
-            return;
-        }
-    }
 
     public static function onDashboardSidebarInit($event)
     {

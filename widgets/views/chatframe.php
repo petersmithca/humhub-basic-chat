@@ -1,8 +1,3 @@
-<?php
-
-use yii\helpers\Html;
-use humhub\models\Setting;
-?>
 <div class="panel">
   <div class="panel-heading">
     <?php echo '<strong>Community</strong> Chat'; ?>
