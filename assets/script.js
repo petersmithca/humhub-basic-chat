@@ -22,13 +22,12 @@ var chat = {
 		$('#name').defaultText('Nickname');
 		$('#email').defaultText('Email (Gravatars are Enabled)');
 
-		// Converting the #chatLineHolder div into a jScrollPane,
-		// and saving the plugin's API in chat.data:
-
-		chat.data.jspAPI = $('#chatLineHolder').jScrollPane({
-			verticalDragMinHeight : 12,
-			verticalDragMaxHeight : 12
-		}).data('jsp');
+		chat.data.jspAPI = '';
+		chat.data.chatElem = $('#chatLineHolder');
+		chat.data.scrollpaneAPI = chat.data.chatElem.niceScroll({
+			horizrailenabled : false,
+			autohidemode : false
+		});
 
 		// Submitting a new chat entry:
 
@@ -45,7 +44,7 @@ var chat = {
 			// via a POST AJAX request:
 			$.ajax({
 				url : chat_Submit,
-				method: "POST",
+				method : "POST",
 				data : $(this).serialize(),
 				success : function(r) {
 					$('#chatText').val('');
@@ -83,17 +82,27 @@ var chat = {
 
 		case 'chatLine':
 			arr = [
-					'<div class="chat chat-', params.id,' rounded"><span class="gravatar"><a href="',params.author.profile,'"><img src="',
-					params.author.gravatar, '" width="23" height="23" onload="this.style.visibility=\'visible\'" /></a>',
-					'</span><span class="author"><a href="',params.author.profile,'">', params.author.name,'</a>',
+					'<div class="chat chat-',
+					params.id,
+					' rounded"><span class="gravatar"><a href="',
+					params.author.profile,
+					'"><img src="',
+					params.author.gravatar,
+					'" width="23" height="23" onload="this.style.visibility=\'visible\'" /></a>',
+					'</span><span class="author"><a href="',
+					params.author.profile, '">', params.author.name, '</a>',
 					':</span><span class="text">', params.message,
 					'</span><span class="time">', params.time, '</span></div>' ];
 			break;
 
 		case 'user':
 			arr = [
-					'<div class="user" title="', params.name, '"><a href="',
-					params.profile, '"><img src="', params.gravatar,
+					'<div class="user" title="',
+					params.name,
+					'"><a href="',
+					params.profile,
+					'"><img src="',
+					params.gravatar,
 					'" width="23" height="23" onload="this.style.visibility=\'visible\'" /></a></div>' ];
 			break;
 		}
@@ -110,15 +119,15 @@ var chat = {
 	addChatLine : function(params) {
 		// All times are displayed in the user's timezone
 		var d = new Date();
-		if(params.time) {
+		if (params.time) {
 			// PHP returns the time in UTC (GMT). We use it to feed the date
 			// object and later output it in the user's timezone. JavaScript
 			// internally converts it for us.
-			d.setUTCHours(params.time.hours,params.time.minutes);
+			d.setUTCHours(params.time.hours, params.time.minutes);
 		}
-		params.time = (d.getHours() < 10 ? '0' : '' ) + d.getHours()+':'+
-					  (d.getMinutes() < 10 ? '0':'') + d.getMinutes();
-		
+		params.time = (d.getHours() < 10 ? '0' : '') + d.getHours() + ':'
+				+ (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
+
 		var markup = chat.render('chatLine', params), exists = $('#chatLineHolder .chat-'
 				+ params.id);
 
@@ -139,16 +148,12 @@ var chat = {
 			if (previous.length) {
 				previous.after(markup);
 			} else
-				chat.data.jspAPI.getContentPane().append(markup);
+				chat.data.chatElem.append(markup);
 		} else
-			chat.data.jspAPI.getContentPane().append(markup);
+			chat.data.chatElem.append(markup);
 
-		// As we added new content, we need to
-		// reinitialise the jScrollPane plugin:
-
-		chat.data.jspAPI.reinitialise();
-		chat.data.jspAPI.scrollToBottom(true);
-
+		chat.data.scrollpaneAPI.resize();
+		chat.data.scrollpaneAPI.doScrollTop(chat.data.chatElem.prop('scrollHeight'), 5);
 	},
 
 	// This method requests the latest chats
@@ -176,8 +181,7 @@ var chat = {
 				}
 
 				if (!chat.data.lastID) {
-					chat.data.jspAPI.getContentPane().html(
-							'<p class="noChats">No chats yet</p>');
+					chat.data.chatElem.html('<p class="noChats">No chats yet</p>');
 				}
 
 				// Setting a timeout for the next request,

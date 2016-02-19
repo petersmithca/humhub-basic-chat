@@ -7,13 +7,10 @@ class Assets extends AssetBundle
 {
 
     public $css = [
-        'chat.css',
-        'jScrollPane.css'
+        'chat.css'
     ];
 
     public $js = [
-        'jquery.mousewheel.js',
-        'jScrollPane.min.js',
         'script.js'
     ];
 
