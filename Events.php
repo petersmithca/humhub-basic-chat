@@ -55,7 +55,7 @@ class Events extends \yii\base\Object
     public static function onAdminMenuInit(\yii\base\Event $event)
     {
         $event->sender->addItem([
-            'label' => Yii::t('Humhub-chatModule.base', 'Humhub-Chat'),
+            'label' => Yii::t('Humhub-chatModule.base', 'Basic Chat'),
             'url' => Url::toRoute('/humhub-chat/admin/index'),
             'group' => 'settings',
             'icon' => '<i class="fa fa-weixin"></i>',
