@@ -5,7 +5,7 @@ use humhub\models\Setting;
 use humhub\modules\humhubchat\controllers\AdminController;
 ?>
 <div class="panel panel-default">
-	<div class="panel-heading"><?=Yii::t('Humhub-chatModule.base', '<strong>Humhub-Chat</strong>'); ?></div>
+	<div class="panel-heading"><?=Yii::t('Humhub-chatModule.base', '<strong>Basic Chat</strong>'); ?></div>
 	<div class="panel-body">
 		<?php $form = CActiveForm::begin(['id' => 'hhc-settings-form']); ?>
 			<?=$form->errorSummary($model); ?>
