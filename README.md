@@ -30,6 +30,6 @@ __Author:__ tobciu
 __Author website:__ [https://github.com/petersmithca](https://github.com/petersmithca)    
 __Author:__ petersmithca    
 __Author website:__ [https://github.com/Felli](https://github.com/Felli)     
-Author:__ Felli    
+__Author:__ Felli    
 __Author website:__ [https://github.com/WebCrew](https://github.com/WebCrew)   
 __Author:__ WebCrew    
