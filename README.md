@@ -19,7 +19,7 @@ If you do not want one or more of these, its best to just edit the config and re
 
 ## Administration
 
-In `Administration -> Humhub-Chat` you can choose between two basic themes and define the timeout for cron
+In `Administration -> Basic Chat` you can choose between two basic themes and define the timeout for cron
 
 ## Authors/Module Website
 
