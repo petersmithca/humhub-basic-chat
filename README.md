@@ -5,7 +5,9 @@ This module is for HumHub Version 0.20 (Yii 2) and greater and cannot be used wi
 ## Description
 
 This module adds a simple chat widget.  
-Chats older than a defined amount of days are deleted by cron.  
+Chats older than a defined amount of days are deleted by cron. 
+
+**Note:** The chat is more a shoutbox and not a real chat, cause it does not support user to user private chat.
 
 Widget works on spaces, dashboard and profile, thanks to contributions from @WebCrew for styling and making more size agnostic
 
