@@ -4,6 +4,9 @@ This module is for HumHub Version 0.20 (Yii 2) and greater and cannot be used wi
 
 ## Description
 
+
+```Note:This is the Development Branch of the Basic Chat, it isn't recommended using as it could be unstable for use.```
+
 This module adds a simple chat widget.  
 Chats older than a defined amount of days are deleted by cron.  
 
