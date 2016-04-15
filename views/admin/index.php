@@ -6,7 +6,7 @@ use humhub\models\Setting;
 use humhub\modules\humhubchat\controllers\AdminController;
 ?>
 <div class="panel panel-default">
-	<div class="panel-heading"><?=Yii::t('Humhub-chatModule.views_humhubchat_index', '<strong>Basic Chat</strong>'); ?></div>
+	<div class="panel-heading"><?=Yii::t('Humhub-chatModule.base', '<strong>Basic Chat</strong>'); ?></div>
 	<div class="panel-body">
 		<?php $form = CActiveForm::begin(['id' => 'hhc-settings-form']); ?>
 			<?=$form->errorSummary($model); ?>
@@ -18,8 +18,8 @@ use humhub\modules\humhubchat\controllers\AdminController;
 				<?=$form->labelEx($model, 'timeout'); ?>
 				<?=$form->textField($model, 'timeout', ['class' => 'form-control', 'readonly' => Setting::IsFixed('timeout', 'humhubchat')]); ?>
 			</div>
-			<p class="help-block"><?=Yii::t('Humhub-chatModule.views_humhubchat_index', 'Amount of days, after messages will be deleted; min value is 0 (no deletion); max: 365'); ?></p>
-			<?php echo Html::submitButton(Yii::t('Humhub-chatModule.views_humhubchat_index', 'Save'), ['class' => 'btn btn-primary']); ?>
+			<p class="help-block"><?=Yii::t('Humhub-chatModule.base', 'Amount of days, after messages will be deleted; min value is 0 (no deletion); max: 365'); ?></p>
+			<?php echo Html::submitButton(Yii::t('Humhub-chatModule.base', 'Save'), ['class' => 'btn btn-primary']); ?>
 			<?=\humhub\widgets\DataSaved::widget(); ?>
 		<?php CActiveForm::end(); ?>
 	</div>
