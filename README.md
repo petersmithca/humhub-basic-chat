@@ -21,6 +21,8 @@ If you do not want one or more of these, its best to just edit the config and re
 2. Rename module directory ```basic-chat``` (May not be required!)
 3. Enable module from >Admin>Modules
 
+## Changelogs
+https://github.com/petersmithca/humhub-basic-chat/commits/master
 
 ## Administration
 
