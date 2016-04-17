@@ -130,13 +130,12 @@ var chat = {
 			// PHP returns the time in UTC (GMT). We use it to feed the date
 			// object and later output it in the user's timezone. JavaScript
 			// internally converts it for us.
-			d.setUTCHours(params.time.hours, params.time.minutes);
+			d.setUTCHours(params.time.hours === 0 ? 23 : params.time.hours - 1, params.time.minutes);
 		}
 		params.time = (d.getHours() < 10 ? '0' : '') + d.getHours() + ':'
 				+ (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
 
-		var markup = chat.render('chatLine', params), exists = $('#chatLineHolder .chat-'
-				+ params.id);
+		var markup = chat.render('chatLine', params), exists = $('#chatLineHolder .chat-' + params.id);
 
 		if (exists.length) {
 			exists.remove();
